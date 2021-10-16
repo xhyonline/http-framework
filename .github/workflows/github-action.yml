@@ -19,8 +19,8 @@ jobs:
 
       - name: 构建 BuiLd
         run: |
-        go build -o app
-        ls
+          go build -o app
+          ls
 
       - name: 同步文件
         uses: burnett01/rsync-deployments@5.1
