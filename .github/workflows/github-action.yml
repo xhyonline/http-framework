@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      APP_NAME: x-http-framework
     steps:
       - name: 检出代码
         uses: actions/checkout@master
@@ -36,7 +38,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: ./app
-          remote_path: /micro-server/myapp
+          remote_path: /micro-server/${{ env.x-http-framework }}
           remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
