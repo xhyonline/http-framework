@@ -21,9 +21,9 @@ jobs:
           go-version: 1.17
 
       - name: 代码质量检测
-        uses: actions/checkout@v1.1.0
+        uses: golangci/golangci-lint-action@v2
         with:
-          config: .golangci.yml
+          version: v1.29
 
       - name: 构建 BuiLd
         run: |
@@ -55,7 +55,7 @@ jobs:
         with:
           host: ${{ secrets.Host }}
           username: root
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.DeploySecret }}
           port: 22
           script: |
             pwd
