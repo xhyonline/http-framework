@@ -1,0 +1,22 @@
+name: GitHub Actions Build and Deploy Demo
+on:
+  push:
+    branches: [ main,master ]
+  pull_request:
+    branches: [ main ,master ] # merge到main分支时触发部署
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 设置环境 Golang 环境
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.17
+          id: go
+
+      - name: 检出代码
+        uses: actions/checkout@master
+
+      - name: 构建 BuiLd
+        uses: go build -o app
