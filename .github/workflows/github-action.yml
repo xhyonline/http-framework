@@ -63,7 +63,7 @@ jobs:
 
       - name: 结果通知
         uses: zzzze/webhook-trigger@master
-        if: failure()
+        if: always()
         with:
           data: "{'event_type':'build-failure','status':'${{ job.status }}',
           'repository':'${{ github.repository }}','job':'${{ github.job }}',
