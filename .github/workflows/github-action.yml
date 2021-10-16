@@ -19,16 +19,25 @@ jobs:
 
       - name: 构建 BuiLd
         run: |
+          export GOPROXY=https://goproxy.io,direct
           go build -o app
           ls
+
+      - name: upx 压缩二进制文件
+        uses: crazy-max/ghaction-upx@v1
+        with:
+          version: latest
+          files: |
+            app
+          args: -fq
 
       - name: 同步文件
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
           path: ./app
-          remote_path: /myapp
-          remote_host: 121.5.70.28
+          remote_path: /micro-server/myapp
+          remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
-          remote_key: ${{ secrets.DeploySecret }}
+          remote_key: ${{ secrets.DeploySecret }} # 请使用 ssh-keygen -t rsa 生成秘钥对,然后将公钥拷贝到要操纵的目标器的/root/.ssh/authorized_keys里,再把私钥黏贴到 github 后台的secret里
