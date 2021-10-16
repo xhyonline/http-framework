@@ -1,14 +1,16 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/xhyonline/http-framework/configs"
 	"github.com/xhyonline/http-framework/internal"
 	"github.com/xhyonline/http-framework/middleware"
 	"github.com/xhyonline/http-framework/router"
-	"net/http"
 
 	"github.com/xhyonline/xutil/sig"
 
+	// nolint
 	. "github.com/xhyonline/http-framework/component" // 忽略包名
 
 	"github.com/gin-gonic/gin"
