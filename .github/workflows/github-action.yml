@@ -60,3 +60,11 @@ jobs:
           script: | # 请自行在这里执行应用的重启命令
             pwd
             ls /micro-server #
+
+      - name: Webhook
+        uses: zzzze/webhook-trigger@master
+        if: failure()
+        with:
+          data: "{'event_type':'build-failure'}"
+          webhook_url: http://121.5.70.28:8080/webhook
+          options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
