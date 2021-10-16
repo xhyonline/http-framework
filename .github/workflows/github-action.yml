@@ -1,4 +1,4 @@
-name: GitHub Actions Build and Deploy Demo
+name: CI构建
 on:
   push:
     branches: [ main,master ]
@@ -22,7 +22,7 @@ jobs:
       - name: 构建 BuiLd
         run: |
           export GOPROXY=https://goproxy.io,direct
-          go build -o app
+          go build -o ${{ env.x-http-framework }}
           ls
 
       - name: upx 压缩二进制文件
@@ -30,15 +30,15 @@ jobs:
         with:
           version: latest
           files: |
-            app
+            ${{ env.x-http-framework }}
           args: -fq
 
       - name: 同步文件
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
-          path: ./app
-          remote_path: /micro-server/${{ env.x-http-framework }}
+          path: ./${{ env.x-http-framework }}
+          remote_path: /micro-server/
           remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
