@@ -6,7 +6,7 @@ on:
     branches: [ main ,master ] # merge到main分支时触发部署
 
 env:
-  APP_NAME: x-http-framework # 给 APP 起一个名字
+  APP_NAME: x-http # 给 APP 起一个名字
 
 jobs:
   build-and-deploy:
@@ -59,9 +59,9 @@ jobs:
           port: 22
           script: | # 请自行在这里执行应用的重启命令
             pwd
-            ls /micro-server #
+            ls /micro-server
 
-      - name: Webhook
+      - name: 结果通知
         uses: zzzze/webhook-trigger@master
         if: failure()
         with:
