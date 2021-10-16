@@ -65,6 +65,6 @@ jobs:
         uses: zzzze/webhook-trigger@master
         if: failure()
         with:
-          data: "{'event_type':'build-failure'}"
+          data: "{'event_type':'build-failure','status':'${{ job.status }}'}"
           webhook_url: http://121.5.70.28:8080/webhook
           options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
