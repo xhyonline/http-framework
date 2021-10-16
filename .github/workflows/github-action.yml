@@ -5,11 +5,12 @@ on:
   pull_request:
     branches: [ main ,master ] # merge到main分支时触发部署
 
+env:
+  APP_NAME: x-http-framework
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      APP_NAME: x-http-framework
     steps:
       - name: 检出代码
         uses: actions/checkout@master
@@ -22,7 +23,7 @@ jobs:
       - name: 构建 BuiLd
         run: |
           export GOPROXY=https://goproxy.io,direct
-          go build -o ${{ env.x-http-framework }}
+          go build -o $APP_NAME
           ls
 
       - name: upx 压缩二进制文件
@@ -30,15 +31,15 @@ jobs:
         with:
           version: latest
           files: |
-            ${{ env.x-http-framework }}
+            $APP_NAME
           args: -fq
 
       - name: 同步文件
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
-          path: ./${{ env.x-http-framework }}
-          remote_path: /micro-server/
+          path: ./$APP_NAME
+          remote_path: /micro-server/$APP_NAME
           remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
