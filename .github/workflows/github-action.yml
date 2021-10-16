@@ -6,7 +6,7 @@ on:
     branches: [ main ,master ] # merge到main分支时触发部署
 
 env:
-  APP_NAME: x-http-framework
+  APP_NAME: x-http-framework # 给 APP 起一个名字
 
 jobs:
   build-and-deploy:
@@ -39,8 +39,9 @@ jobs:
         with:
           switches: -avzr --delete
           path: ./$APP_NAME
-          remote_path: /micro-server/$APP_NAME
+          remote_path: /micro-server/$APP_NAME # 发布到远程主机,当然你需要自己创建 /micro-server 目录
           remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
           remote_key: ${{ secrets.DeploySecret }} # 请使用 ssh-keygen -t rsa 生成秘钥对,然后将公钥拷贝到要操纵的目标器的/root/.ssh/authorized_keys里,再把私钥黏贴到 github 后台的secret里
+          rsh: ls # 执行命令
