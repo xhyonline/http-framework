@@ -54,4 +54,4 @@ jobs:
           port: 22
           script: |
             pwd
-            ls
+            ls /micro-server

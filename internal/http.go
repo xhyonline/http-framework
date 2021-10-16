@@ -2,9 +2,11 @@ package internal
 
 import (
 	"context"
-	. "github.com/xhyonline/http-framework/component" // 忽略包名
 	"net/http"
 	"os"
+
+	// nolint
+	. "github.com/xhyonline/http-framework/component" // 忽略包名
 )
 
 type HTTPServer struct {

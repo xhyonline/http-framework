@@ -21,7 +21,7 @@ func main() {
 	// 初始化配置
 	configs.Init(configs.WithRedis(), configs.WithMySQL())
 	// 初始化 mysql 、redis 等服务组件
-	ComponentInit(RegisterRedis(), RegisterMySQL(), RegisterLogger())
+	Init(RegisterRedis(), RegisterMySQL(), RegisterLogger())
 	// 中间件
 	g.Use(middleware.Cors())
 	// 初始化路由

@@ -1,8 +1,9 @@
 package component
 
 import (
-	"github.com/xhyonline/http-framework/configs"
 	"strconv"
+
+	"github.com/xhyonline/http-framework/configs"
 
 	"github.com/xhyonline/xutil/db"
 )
