@@ -29,23 +29,22 @@ jobs:
       - name: 构建 BuiLd
         run: |
           export GOPROXY=https://goproxy.io,direct
-          go build -o $APP_NAME
-          ls
+          go build -o app
 
       - name: upx 压缩二进制文件
         uses: crazy-max/ghaction-upx@v1
         with:
           version: latest
           files: |
-            $APP_NAME
+            app
           args: -fq
 
       - name: 同步文件
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
-          path: ./$APP_NAME
-          remote_path: /micro-server/$APP_NAME # 发布到远程主机,当然你需要自己创建 /micro-server 目录
+          path: ./app
+          remote_path: /micro-server/$APP_NAME # 发布到远程主机,当然你需要自己创建 /micro-server 目录 $APP_NAME 是全局的变量
           remote_host: ${{ secrets.Host }}
           remote_port: 22
           remote_user: root
@@ -58,6 +57,6 @@ jobs:
           username: root
           key: ${{ secrets.DeploySecret }}
           port: 22
-          script: |
+          script: | # 请自行在这里执行应用的重启命令
             pwd
-            ls /micro-server
+            ls /micro-server #
