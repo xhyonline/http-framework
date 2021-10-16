@@ -18,4 +18,18 @@ jobs:
           go-version: 1.17
 
       - name: 构建 BuiLd
-        run: go build -o app
+        run: |
+        export GOPROXY=https://goproxy.io,direct
+        go build -o app
+        ls
+
+      - name: 同步文件
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: ./app
+          remote_path: /myapp
+          remote_host: 121.5.70.28
+          remote_port: 22
+          remote_user: root
+          remote_key: ${{ secrets.DeploySecret }}
