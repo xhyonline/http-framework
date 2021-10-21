@@ -1,9 +1,10 @@
 package configs
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
+
+	"github.com/xhyonline/xutil/logger"
 
 	"github.com/BurntSushi/toml"
 	"github.com/xhyonline/xutil/helper"
@@ -69,7 +70,7 @@ func load(option Option) {
 	if exists, _ := helper.PathExists(option()); exists {
 		body, _ := ioutil.ReadFile(option())
 		if _, err := toml.Decode(string(body), Instance); err != nil {
-			fmt.Println("配置文件加载失败")
+			logger.Errorf("配置文件加载失败")
 			os.Exit(0)
 		}
 	}

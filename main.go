@@ -11,7 +11,7 @@ import (
 	"github.com/xhyonline/xutil/sig"
 
 	// nolint
-	. "github.com/xhyonline/http-framework/component" // 忽略包名
+	"github.com/xhyonline/http-framework/component" // 忽略包名
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,7 +21,7 @@ func main() {
 	// 初始化配置
 	configs.Init(configs.WithRedis(), configs.WithMySQL())
 	// 初始化 mysql 、redis 等服务组件
-	Init(RegisterRedis(), RegisterMySQL(), RegisterLogger())
+	component.Init(component.RegisterRedis(), component.RegisterMySQL())
 	// 中间件
 	g.Use(middleware.Cors())
 	// 初始化路由
