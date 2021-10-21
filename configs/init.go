@@ -13,6 +13,8 @@ import (
 // Env 当前环境
 var Env = "dev"
 
+var Name = "http-framework"
+
 type Config struct {
 	MySQL *MySQL `toml:"mysql"`
 	Redis *Redis `toml:"redis"`
@@ -59,6 +61,7 @@ func Init(options ...Option) {
 	if exists {
 		Env = "product"
 		filePath = productConfigPath
+		logger.SetLoggerProduct("/tmp/log/go-micro/" + Name + ".log")
 	}
 	for _, v := range options {
 		load(v)
