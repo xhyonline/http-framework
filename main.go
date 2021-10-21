@@ -10,7 +10,6 @@ import (
 
 	"github.com/xhyonline/xutil/sig"
 
-	// nolint
 	"github.com/xhyonline/http-framework/component" // 忽略包名
 
 	"github.com/gin-gonic/gin"
